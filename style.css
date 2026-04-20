@@ -1,0 +1,574 @@
+html {
+  scroll-behavior: smooth;
+  /* 捲動方式:平滑 */
+}
+
+/* 整個檔案都套用 */
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  /* 將列表前圖示隱藏*/
+  box-sizing: border-box;
+  /* 改元素寬高計算 全部加起來=100px */
+
+}
+
+/* 導覽頁 */
+
+.main-header {
+  background-color: #1e1e1e;
+  position: fixed;
+  top: 0;
+  /* 貼齊上方 */
+  left: 0;
+  width: 100%;
+  /* 滿版 */
+  z-index: 1000;
+  /* 壓在最上層 */
+}
+
+.main-header .header-container {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  /* 不要貼邊 */
+  width: 100%;
+}
+
+/* 漢堡 */
+.menu-control,
+.menu-btn {
+  display: none;
+}
+
+.main-header .logo {
+  width: 35px;
+
+}
+
+.main-header .logo img {
+  width: 100%;
+  vertical-align: middle;
+  /* 行內元素上下對齊 middle避免圖底出空隙 */
+}
+
+.main-header .main-nav {
+  display: flex;
+  margin-left: auto;
+  font-size: 15px;
+}
+
+.main-header .main-nav a {
+  text-decoration: none;
+  /* 隱藏預設超連結的底線 */
+  color: #fff;
+  padding: 5px 1em;
+  /*em 當前元素的字體大小*/
+  position: relative;
+  /* 相對定位 此為父層 */
+  transform: translateY(0PX);
+  /*Y軸(上下）移動 0px*/
+  transition: .3S;
+}
+
+/* 超連結底下一條線 */
+.main-header .main-nav a:hover {
+  /* 滑鼠碰到文字上升 */
+  transform: translateY(-5PX);
+}
+
+.main-header .main-nav a::after {
+  /*元素後面生成一個東西-偽元素 (初始狀態)*/
+  content: '';
+  /*要放進偽元素的內容 空字串--建立一個元素 裡面沒有文字 拿來畫東西*/
+  position: absolute;
+  /*座標相對定位(父層) 想放哪就放哪*/
+  left: 50%;
+  /*從中向左 */
+  right: 50%;
+  /*從中向右 填滿父層*/
+  bottom: -1px;
+  /*底部下面移動1px*/
+  height: 0;
+  border-bottom: 1px solid #fff;
+  transition: .5s;
+  /* 變成線出來有動畫 更完整  */
+}
+
+.main-header .main-nav a:hover:after {
+  /*滑鼠碰到顯示 有線 */
+  left: 0;
+  right: 0;
+}
+
+/* 收尋鍵 */
+.main-header .header-search {
+  display: flex;
+}
+
+.main-header .header-search button,
+.main-header .header-search input {
+  border: none;
+  /* 取消預設灰色邊框 */
+  background-color: #fff;
+  padding: 5px 12px;
+}
+
+.main-header .header-search button:focus,
+.main-header .header-search input:focus {
+  outline: none;
+  /*取消打字時出現的藍色邊框  */
+}
+
+.main-header .header-search input {
+  /* 輸入框-左側直角: 右側半圓:左上 右上 右下 左下 */
+  border-radius: 200px 0 0 200px;
+}
+
+.main-header .header-search button {
+  /* 按鈕-左側半圓: 右側直角:左上 右上 右下 左下 */
+  border-radius: 0 200px 200px 0;
+}
+
+.main-header .header-search button:hover {
+  /* 滑鼠移到收尋框 變成小手 I */
+  cursor: pointer;
+}
+
+/* banner  */
+.banner {
+  width: 100%;
+  height: 100vh;
+  /*視窗全部高度 百分之百*/
+  display: flex;
+  /*元素可自由調整大小位置 讓左右分開 */
+  background-color: #ccc;
+
+}
+
+/* 左文字 */
+.banner-container {
+  width: 30%;
+  height: 100%;
+  margin: 0;
+  display: flex;
+}
+
+.banner-txt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /*元素可自由調整大小位置 讓左右分開 */
+  flex-direction: column;
+  /*決定排的方向 元素直排 上到下 {預設row橫排}*/
+  justify-content: center;
+  /*直的上下控制 此為置中*/
+  align-items: flex-start;
+  /* 靠起點對齊 */
+  margin-inline-start: 30px;
+  /* 元素開始的那一側留 30px 空間 */
+
+}
+
+.banner-txt h1 {
+  font-size: 50px;
+  border-bottom: 1px solid #333;
+  /*邊框-元素下畫線 實線*/
+  padding-bottom: 0.2em;
+  /*內容裡面留空間 只控制下面那一邊的內距 -0.3em 0.3倍的文字大小*/
+  margin-bottom: 0.2em;
+  /*元素外面拉開距離 控制元素外面下面的距離 0.3被字體大小*/
+}
+
+.banner-txt h1 small {
+  display: block;
+  /*一個元素占一行*/
+  font-size: 25px;
+}
+
+.banner-txt h2 {
+  font-size: 15px;
+}
+
+.banner-txt p {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/*banner-右圖片*/
+
+.banner-img {
+  width: 70%;
+  height: 100%;
+  background: url(image/畢音團照.jpg) 45% center / cover no-repeat;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+  /* 斜切 */
+}
+
+/* about 關於我們*/
+.about {
+  background: #ccc;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+/* student-container：控制排版 */
+.student-container {
+  display: flex;
+  /* 橫排 */
+  flex-wrap: wrap;
+  /* 自動換行 */
+  gap: 25px;
+  /* card間距 */
+  justify-content: center;
+  /* 整排卡片置中 */
+  background-color: #ccc;
+  margin: 10px #ccc;
+}
+
+/* card */
+.card {
+  width: calc(33.333% - 25px);
+  /* 一排放3個 -間距(闢免擠爆) */
+  background-color: #ccc;
+  border-radius: 15px;
+  /* 變圓角 */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  /* 卡片有陰影 左右不偏:往下陰影:模糊程度:rgb a淡淡的透明度*/
+  overflow: hidden;
+  /* 超過卡片裁掉  */
+}
+
+/* summary */
+.card summary {
+  cursor: pointer;
+  /* 放上去變手指 */
+  padding: 25px;
+  /* 不貼邊 */
+  text-align: center;
+  /* 內容置中 */
+}
+
+.card summary::-webkit-details-marker {
+  display: none;
+  /* Chrome/Safari 的箭頭消失 */
+}
+
+.card summary::after {
+  content: " ＋點擊查看全文";
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #144ae1;
+}
+
+.card[open] summary::after {
+  content: " －收起內容";
+}
+
+/* 打開時 更多文字*/
+.card[open] .more-word {
+  max-height: 800px;
+  /* 展開高度 */
+  padding-bottom: 20px;
+}
+
+/* hover效果 */
+.card:hover {
+  transform: translateY(-5px);
+  transition: 0.5s;
+}
+
+.card img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  /* 圓形頭像 */
+}
+
+.short-word h4 {
+  font-size: 17px;
+}
+
+.short-word p {
+  font-size: 14px;
+}
+
+.more-word {
+  max-height: 0;
+  /* 高度0 看起來收起來*/
+  overflow: hidden;
+  /* 超過的文字隱藏 */
+  transition: max-height 0.5s ease;
+  /* 高度改變變動畫*/
+  padding: 10px 20px;
+  /* 內距-上下10px 左右20px */
+}
+
+.more-word small {
+  font-size: 14px;
+  color: #144ae1;
+}
+
+.more-word p {
+  font-size: 14px;
+
+}
+/* 演出資訊 */
+.information {
+  background: #ccc;
+  padding: 80px 20px;
+  text-align: center;
+
+}
+
+.performance-list {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.performance-list li {
+  margin-bottom: 20px;
+}
+
+/* 演出卡片 */
+.performance-card {
+  background: #ccc;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: 0.3s;
+}
+
+.performance-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 影片 */
+.video-box {
+  margin-top: 10px;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-box iframe {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* 平板版 */
+@media (max-width:1060px) {
+  /* header */
+
+
+
+  /*漢堡按鈕出現 */
+  .menu-btn {
+    display: block;
+    /* 平板版才顯示 */
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    /* 箭頭變小手 */
+    /* 雙重保障 但order有點不必要 */
+    order: 10;
+    /* order數值越大越右邊(排越後面)*/
+    margin-left: auto;
+    /* margin:left:;把左邊剩下的空間自動吃掉---背景到最右邊*/
+  }
+
+  /*nav隱藏 直式下拉選單 */
+  .main-header .main-nav {
+    display: none;
+    position: absolute;
+    /* 絕對定位(定位父層)*/
+    top: 55px;
+    /* 根據 header 高度調整 */
+    left: 0;
+    /* 從左邊開始 若是50則從中間 */
+    width: 100%;
+    background-color: #1e1e1e;
+    flex-direction: column;
+    z-index: 99;
+    /* 控制(前後堆疊)圖層排序 數值越大越上層 */
+  }
+
+  /* nav選單文字居中 */
+  .main-header .main-nav a {
+    text-align: center;
+    /* 文字置中 */
+    font-size: 15px;
+    padding: 12px;
+  }
+
+  /* 搜尋框在nav連結下方 */
+  .main-header .main-nav .header-search {
+    display: none;
+    position: static;
+    /* 不要浮在畫面上 在nav下面排 */
+    top: 250px;
+    /* 數值需根據你連結的數量手動微調 */
+    padding: 12px;
+    justify-content: center;
+    /*搜尋框在深色區域置中 */
+  }
+
+  /*Checkbox被勾選顯示選單--~選取器 */
+  .menu-control:checked~.main-nav,
+  .menu-control:checked~.main-nav .header-search {
+    display: flex;
+    /* 顯示 */
+
+
+  }
+
+  .banner {
+    flex-direction: column-reverse;
+    /*元素排版方向橫變直 並上下調換 圖上文下*/
+    width: 100%;
+    height: auto;
+
+  }
+
+  .banner-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2px 2px;
+    /*手機左右留空 */
+  }
+
+  .banner-txt {
+    margin-inline-start: 8px;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .banner-txt h1 {
+    font-size: 40px;
+  }
+
+  .banner-txt h1 small {
+    font-size: 30px;
+  }
+
+  .banner-txt h2,
+  .banner-txt p {
+    font-size: 20px;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: 35vh;
+    /*控制高度*/
+    clip-path: none;
+    background: url(image/畢音團照.jpg) center / cover no-repeat;
+  }
+
+  .about-container h2 {
+    font-size: 20px;
+  }
+
+  .about-container p {
+    font-size: 14px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* student */
+  .card {
+    width: calc(50% - 25px);
+  }
+
+  .card img {
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    /* 圓形頭像 */
+  }
+
+  /* 打開時 更多文字*/
+  .card[open] .more-word {
+    max-height: 1000px;
+    /* 展開高度 */
+    padding-bottom: 20px;
+  }
+}
+
+
+
+
+/* 手機版 */
+@media (max-width:760px) {
+
+
+
+
+
+
+  .banner {
+    flex-direction: column-reverse;
+    /*元素排版方向橫變直 並上下調換 圖上文下*/
+    width: 100%;
+    height: auto;
+  }
+
+  .banner-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 2px 2px;
+    /*手機左右留空 */
+  }
+
+  .banner-txt {
+    margin-inline-start: 5px;
+  }
+
+  .banner-txt h1 {
+    font-size: 30px;
+  }
+
+  .banner-txt h1 small {
+    font-size: 15px;
+  }
+
+  .banner-txt h2,
+  .banner-txt p {
+    font-size: 13px;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: 35vh;
+    /*控制高度*/
+    clip-path: none;
+    background: url(image/畢音團照.jpg) center / cover no-repeat;
+  }
+
+  /* student */
+  .card {
+    width: 100%;
+    margin: 10px 20px;
+  }
+
+  .card img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    /* 圓形頭像 */
+  }
+
+  /* 打開時 更多文字*/
+  .card[open] .more-word {
+    max-height: 1000px;
+    /* 展開高度 */
+    padding-bottom: 20px;
+  }
+}
